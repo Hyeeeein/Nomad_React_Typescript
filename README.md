@@ -1,46 +1,49 @@
-# Getting Started with Create React App
+# Nomad_React_Typescript
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Installation
 
-## Available Scripts
+#### app 과 함께 설치
 
-In the project directory, you can run:
+```
+npx create-react-app my-app --template typescript
+```
 
-### `npm start`
+#### 진행된 프로젝트에서 설치
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```
+npm install --save typescript @types/node @types/react @types/react-dom @types/jest
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+#### 라이브러리 및 페키지를 위한 type definition 설치
 
-### `npm test`
+```
+npm i --save-dev @types/라이브러리 및 패키지 이름
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped) 여러 type definition 정보가 있는 Github 참고
 
-### `npm run build`
+### Grammar
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### interface
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- 객체 데이터를 typescript 에게 type 을 설명
+- typescript 와 코드가 실행되기 전에 type 확인, 반면 propTypes 는 코드 실행 후 에러
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### default props & optional props
 
-### `npm run eject`
+- optional props : | (or 연산자) 대신 key 값 뒤에 ? 사용
+- default props : 기본값 명시 ?? 사용 (++ 이때 js 기능으로 인수 값에 기본값을 할당해주는 방식도 가능)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#### event 에 type 을 추가하는 법
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- 이벤트 핸들러 함수의 파라미터로 event 를 적는데 해당 type 을 같이 적어줘야 함
+- (event: React.FormEvent<HTMLFormElement>) : React.이벤트타입<태그타입>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+#### type definition 확장
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+ex) styled-component
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- src 에 style.d.ts 파일 생성하여 type definition 에 덮어쓰기 할 것임
+- [API Reference - styled-components](https://styled-components.com/docs/api) 의 typescript 부분 참고하여 파일에 복붙
+- 해당 파일에 작성한 DefaultTheme 을 토대로 index.tsx 에 ThemeProvider 추가하고 theme 추가
+- prop 로 theme 내려받아 스타일 설정
